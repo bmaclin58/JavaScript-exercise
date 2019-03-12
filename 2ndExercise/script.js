@@ -1,4 +1,4 @@
-var johnScore, mikeScore, maryScore;
+var johnScoreAVR, mikeScoreAVR, maryScoreAVR;
 
 johnScoreAVR = (89 + 120 + 103)/3;
 mikeScoreAVR = (116 + 94 + 123)/3;
