@@ -29,15 +29,37 @@ function RollDice(){
     }
     else{
         //end turn
-        roundScore = 0;
-        document.getElementById("current-"+activePlayer).textContent = 0;
-
-        activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-
-        document.querySelector(".player-0-panel").classList.toggle("active");
-        document.querySelector(".player-1-panel").classList.toggle("active");
-
         diceDOM.src = "pig.jpg";
+        NextTurn();
+    }
+}
+
+function NextTurn(){
+    roundScore = 0;
+    document.getElementById("current-"+activePlayer).textContent = 0;
+
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+}
+
+function HoldScore(){
+    //Add current score to global score
+    scores[activePlayer] += roundScore;
+    //update UI to the screen
+    document.querySelector("#score-"+activePlayer).textContent = scores[activePlayer];
+
+    //check if player won the game and switch player
+    if(scores[activePlayer] >= 100){
+        document.querySelector("#name-"+activePlayer).textContent = "Winner!";
+        document.querySelector(".dice").style.display = "none";
+        document.querySelector(".player-"+activePlayer+ "-panel").classList.add("winner");
+        document.querySelector(".player-"+activePlayer+ "-panel").classList.remove("active");
+
+    }
+    else{
+        NextTurn();
     }
 }
 
@@ -49,6 +71,7 @@ document.getElementById("current-0").textContent = "0";
 document.getElementById("current-1").textContent = "0";
 
 document.querySelector(".btn-roll").addEventListener("click", RollDice);
+document.querySelector(".btn-hold").addEventListener("click", HoldScore);
 
 //can target or display data
 //document.querySelector("#current-"+activePlayer).textContent = dice;
