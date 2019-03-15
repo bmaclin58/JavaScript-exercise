@@ -7,9 +7,31 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 */
 
-var scores = [0,0];
-var roundScore = 0;
-var activePlayer = 0;
+var scores;
+var roundScore;
+var activePlayer;
+
+function NewGame(){
+    scores = [0,0];
+    roundScore = 0;
+    activePlayer = 0;
+    //targets css. Removes dice icon, and scores on load
+    document.querySelector(".dice").style.display = "none";
+    document.getElementById("score-0").textContent = "0";
+    document.getElementById("score-1").textContent = "0";
+    document.getElementById("current-0").textContent = "0";
+    document.getElementById("current-1").textContent = "0";
+    document.querySelector("#name-0").textContent = "Player 1";
+    document.querySelector("#name-1").textContent = "Player 2";
+    document.querySelector(".btn-roll").style.display = "block";
+    document.querySelector(".btn-hold").style.display = "block";
+    document.querySelector(".player-0-panel").classList.remove("winner");
+    document.querySelector(".player-1-panel").classList.remove("winner");
+    document.querySelector(".player-0-panel").classList.remove("active");
+    document.querySelector(".player-1-panel").classList.remove("active");
+    document.querySelector(".player-0-panel").classList.add("active");
+
+}
 
 function RollDice(){
     //random number between 1 and 6 needs to be generated 
@@ -56,6 +78,8 @@ function HoldScore(){
         document.querySelector(".dice").style.display = "none";
         document.querySelector(".player-"+activePlayer+ "-panel").classList.add("winner");
         document.querySelector(".player-"+activePlayer+ "-panel").classList.remove("active");
+        document.querySelector(".btn-roll").style.display = "none";
+        document.querySelector(".btn-hold").style.display = "none";
 
     }
     else{
@@ -63,16 +87,12 @@ function HoldScore(){
     }
 }
 
-//targets css. Removes dice icon, and scores on load
-document.querySelector(".dice").style.display = "none";
-document.getElementById("score-0").textContent = "0";
-document.getElementById("score-1").textContent = "0";
-document.getElementById("current-0").textContent = "0";
-document.getElementById("current-1").textContent = "0";
+
+NewGame();
 
 document.querySelector(".btn-roll").addEventListener("click", RollDice);
 document.querySelector(".btn-hold").addEventListener("click", HoldScore);
-
+document.querySelector(".btn-new").addEventListener("click", NewGame);
 //can target or display data
 //document.querySelector("#current-"+activePlayer).textContent = dice;
 
