@@ -20,6 +20,8 @@ var scores;
 var roundScore;
 var activePlayer;
 var previousRoll;
+//custom score is defaulted to 100
+var customScore = 100;
 
 function NewGame(){
     scores = [0,0];
@@ -85,7 +87,7 @@ function HoldScore(){
     document.querySelector("#score-"+activePlayer).textContent = scores[activePlayer];
 
     //check if player won the game and switch player
-    if(scores[activePlayer] >= 100){
+    if(scores[activePlayer] >= customScore){
         document.querySelector("#name-"+activePlayer).textContent = "Winner!";
         document.querySelector(".dice").style.display = "none";
         document.querySelector(".player-"+activePlayer+ "-panel").classList.add("winner");

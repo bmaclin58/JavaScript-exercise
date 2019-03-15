@@ -125,7 +125,9 @@ button:hover i { margin-right: 20px; }
 button:focus {
     outline: none;
 }
-
+/*
+//http://demos.themelize.me/appstrap3.2.1/theme/elements-icons-ionicons.html
+*/
 i {
     color: #EB4D4D;
     display: inline-block;
@@ -136,10 +138,16 @@ i {
     margin-top: -4px;
     transition: margin 0.3s;
 }
+.ion-android-add{
+    font-size: 25px;
+}
 
-.btn-new { top: 45px;}
+.btn-new { top: 25px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+.btn-Score { top: 140px;
+            font-size: 15px;}
+
 
 .dice {
     position: absolute;
@@ -148,6 +156,26 @@ i {
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+}
+
+input{
+    text-align: center;
+    position: absolute;
+    top: 80px;
+    width: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #555;
+    background: none;
+    border: none;
+    font-family: Lato;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 300;
+    border-style: inset; 
+    border-width: 2px; 
 }
 
 .winner { background-color: #f7f7f7; }
