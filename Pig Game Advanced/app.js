@@ -42,9 +42,14 @@ function NewGame(){
     document.querySelector(".player-0-panel").classList.remove("active");
     document.querySelector(".player-1-panel").classList.remove("active");
     document.querySelector(".player-0-panel").classList.add("active");
+    document.querySelector(".btn-Score").style.display = "block";
+    document.querySelector("#CustomScore").style.display = "block";
+    document.getElementById("CustomScore").value = 100;
+
 }
 
 function RollDice(){
+    HideCustomScores();
     //random number between 1 and 6 needs to be generated 
     var dice = Math.floor(Math.random() * 6) + 1;
     //var dice = 6;
@@ -81,6 +86,10 @@ function RollDice(){
 
 function HoldScore(){
     previousRoll = 0;
+    CustomScore();
+    HideCustomScores();
+
+    console.log("The Score to win is " + customScore);
     //Add current score to global score
     scores[activePlayer] += roundScore;
     //update UI to the screen
@@ -112,12 +121,23 @@ function NextTurn(){
     document.querySelector(".player-1-panel").classList.toggle("active");
 }
 
+function CustomScore(){
+    customScore = document.getElementById("CustomScore").value;
+    HideCustomScores();
+}
+function HideCustomScores(){
+    document.querySelector(".btn-Score").style.display = "none";
+    document.querySelector("#CustomScore").style.display = "none";
+    //display the goal at the bottom
+}
+
 
 NewGame();
 
 document.querySelector(".btn-roll").addEventListener("click", RollDice);
 document.querySelector(".btn-hold").addEventListener("click", HoldScore);
 document.querySelector(".btn-new").addEventListener("click", NewGame);
+document.querySelector(".btn-Score").addEventListener("click", CustomScore);
 //can target or display data
 //document.querySelector("#current-"+activePlayer).textContent = dice;
 
