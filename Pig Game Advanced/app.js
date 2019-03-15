@@ -16,40 +16,57 @@ ADVANCED RULES
 
 */
 
-var scores;
-var roundScore;
-var activePlayer;
-var previousRoll;
+var scores, roundScore, activePlayer, previousRoll;
+
 //custom score is defaulted to 100
 var customScore = 100;
 
+//fires on "New Game" button.  Defaults the game
 function NewGame(){
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
+    
     //targets css. Removes dice icon, and scores on load
     document.querySelector(".dice").style.display = "none";
+
+    //sets scores to 0 on load
     document.getElementById("score-0").textContent = "0";
     document.getElementById("score-1").textContent = "0";
     document.getElementById("current-0").textContent = "0";
     document.getElementById("current-1").textContent = "0";
+
+    //removes the "Winner" test
     document.querySelector("#name-0").textContent = "Player 1";
     document.querySelector("#name-1").textContent = "Player 2";
+
+    //displays roll and hold button if they have been removed 
     document.querySelector(".btn-roll").style.display = "block";
     document.querySelector(".btn-hold").style.display = "block";
+
+    //clears winner css that might have been added
     document.querySelector(".player-0-panel").classList.remove("winner");
     document.querySelector(".player-1-panel").classList.remove("winner");
+
+    //makes player 1 the starting player
     document.querySelector(".player-0-panel").classList.remove("active");
     document.querySelector(".player-1-panel").classList.remove("active");
     document.querySelector(".player-0-panel").classList.add("active");
+
+    //displays the custom score buttons and sets the default score
     document.querySelector(".btn-Score").style.display = "block";
     document.querySelector("#CustomScore").style.display = "block";
     document.getElementById("CustomScore").value = 100;
+
+
 
 }
 
 function RollDice(){
     HideCustomScores();
+    CustomScore();
+    DisplayScoreGoal();
+    
     //random number between 1 and 6 needs to be generated 
     var dice = Math.floor(Math.random() * 6) + 1;
     //var dice = 6;
@@ -87,6 +104,7 @@ function RollDice(){
 function HoldScore(){
     previousRoll = 0;
     CustomScore();
+    DisplayScoreGoal();
     HideCustomScores();
 
     console.log("The Score to win is " + customScore);
@@ -123,6 +141,7 @@ function NextTurn(){
 
 function CustomScore(){
     customScore = document.getElementById("CustomScore").value;
+    DisplayScoreGoal();
     HideCustomScores();
 }
 function HideCustomScores(){
@@ -131,9 +150,11 @@ function HideCustomScores(){
     //display the goal at the bottom
 }
 
+function DisplayScoreGoal(){
+    document.getElementById("DisplayScoreGoal").textContent = customScore;
+}
 
 NewGame();
-
 document.querySelector(".btn-roll").addEventListener("click", RollDice);
 document.querySelector(".btn-hold").addEventListener("click", HoldScore);
 document.querySelector(".btn-new").addEventListener("click", NewGame);
