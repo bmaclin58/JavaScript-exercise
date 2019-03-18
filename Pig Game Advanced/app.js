@@ -57,6 +57,7 @@ function NewGame(){
     document.querySelector(".btn-Score").style.display = "block";
     document.querySelector("#CustomScore").style.display = "block";
     document.getElementById("CustomScore").value = 100;
+    document.querySelector("#DisplayScoreGoal").style.display="none";
 
 
 
@@ -152,6 +153,7 @@ function HideCustomScores(){
 
 function DisplayScoreGoal(){
     document.getElementById("DisplayScoreGoal").textContent = customScore;
+    document.querySelector("#DisplayScoreGoal").style.display="block";
 }
 
 NewGame();
