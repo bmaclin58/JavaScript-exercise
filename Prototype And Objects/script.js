@@ -30,19 +30,42 @@ function PrintQuestion(){
     for (var index = 0; index < questionAsked.choices.length; index++){
         console.log(questionAsked.choices[index]);
     } 
-    var selectedAnswer = prompt ("Select an answer: ");
+    var selectedAnswer = prompt ("Select an answer (type the number): Type exit to quit");
     CheckAnswer(selectedAnswer);
+}
+
+function GenerateNewQuestion(allQuestions){
+    console.log("GenerateNewQuestion" + totalScore);
+    return randomQuestion = Math.round(Math.random() * (allQuestions.length - 1));
 }
 
 function CheckAnswer(answer){
     var desiredAnswer = questionAsked.answer;
 
-    if (desiredAnswer == questionAsked.options[answer]){
+    console.log("Check Answer" + totalScore);
+    if (answer === "exit"){
+        return;
+    }
+
+    else if (desiredAnswer == questionAsked.options[answer]){
         console.log("Answer is correct");
+        totalScore++;
+        CallScore(totalScore);
+        QUIZ();
+
     }
     else{
         console.log("Answer is incorrect");
+        CallScore(totalScore);
+        QUIZ();
+
     }
+}
+
+function CallScore(totalScore){
+    console.log("Call Score" + totalScore);
+    console.log("Your current score is: " + totalScore);
+    console.log("--------------------");
 }
 
 var question1 = new QUESTION ("Luke Skywaker is played by which actor?", "Mark Hamill" , ["Harrison Ford" , "Will Smith" , "Mark Hamill" , "Adam Driver"]);
@@ -51,11 +74,17 @@ var question3 = new QUESTION ("What was the first internet content search engine
 
 //store questions in an array....
 var allQuestions = [question1,question2,question3];
-var randomQuestion = Math.round(Math.random() * (allQuestions.length - 1));
-
+console.log("Outside 1" + totalScore);
+GenerateNewQuestion(allQuestions);
+console.log("Outside 2" + totalScore);
 var questionAsked = allQuestions[randomQuestion];
-
+console.log("Outside 3" + totalScore);
+var randomQuestion;
 PrintQuestion();
+console.log("Outside 4" + totalScore);
+
+var totalScore = 0;
+
 //will need to create a function that runs a check on the value of the answer and the value of the chosen array.  The prompt will save the index spot of the answers
 }
 QUIZ();

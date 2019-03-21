@@ -74,7 +74,6 @@ change (age, OBJ);
 console.log(age);
 console.log(OBJ.city);
 
-*/
 //Passing functions as arguments
 var years = [2000, 2005, 1999, 2019, 1994 ];
 
