@@ -11,52 +11,45 @@
 */
 
 function QUIZ() {
+    //constructor for the questions that are added to the queue 
 var QUESTION = function (question, answer, options){
     this.question = question;
     this.answer = answer;
     this.options = options;
     this.choices = GenerateChoices(this.options);
 };
+
+//a loop that as the options based on the length of the choices 
 function GenerateChoices(options){
-    //console.log("Generate Choices " + totalScore);
     var arrayStorage = [];
     for (index = 0; index < options.length; index++){
         arrayStorage.push((index + ": " + options[index]));
     }
     return arrayStorage;
 }
-//function GenerateQuestions (){
-    var question1 = new QUESTION ("Luke Skywaker is played by which actor?", "Mark Hamill" , ["Harrison Ford" , "Will Smith" , "Mark Hamill" , "Adam Driver"]);
-    var question2 = new QUESTION ("Python3 was released in what year?", 2008 , [2008 , 2000 , 1996 , 2010, 1990]);
-    var question3 = new QUESTION ("What was the first internet content search engine?", "Archie" , ["Google" , "Archie" , "AskJeeves" , "AOL", "Yahoo" , "KnowBot"]);
-    var totalScore= 0;
-    //store questions in an array....
-    var allQuestions = [question1,question2,question3];
-    console.log("Before PrintQuestion " + totalScore);
-    PrintQuestion(totalScore,allQuestions);
-    
-    console.log("Outside " + totalScore);
-//}
+
 function PrintQuestion(totalScore,allQuestions){
-    console.log("PrintQuestion "+ totalScore);
-//gives a random number based on the allQuestions array
+    //gives a random number based on the allQuestions array
     var randomQuestion = Math.round(Math.random() * (allQuestions.length - 1));
+    
     //assigns the asked question to the random index in the array
     var questionAsked = allQuestions[randomQuestion];
     console.log(questionAsked.question);
     
+    //prints each option from the questions object
     for (var index = 0; index < questionAsked.choices.length; index++){
         console.log(questionAsked.choices[index]);
     } 
     var selectedAnswer = prompt ("Select an answer (type the number): Type exit to quit");
+    
     CheckAnswer(selectedAnswer,totalScore, questionAsked);
 }
 
 function CheckAnswer(answer,totalScore,questionAsked){
     var desiredAnswer = questionAsked.answer;
 
-    console.log("Check Answer " + totalScore);
     if (answer === "exit"){
+        console.log("You have exited the game");
         return;
     }
     else if (desiredAnswer == questionAsked.options[answer]){
@@ -75,16 +68,25 @@ function CheckAnswer(answer,totalScore,questionAsked){
 }
 
 function CallScore(totalScore){
-    console.log("Call Score " + totalScore);
     console.log("Your current score is: " + totalScore);
     console.log("--------------------");
 }
 
-PrintQuestion(totalScore,allQuestions);
-console.log("WeOutside");
+// Question List
+var question1 = new QUESTION ("Luke Skywaker is played by which actor?", "Mark Hamill" , ["Harrison Ford" , "Will Smith" , "Mark Hamill" , "Adam Driver"]);
+var question2 = new QUESTION ("Python3 was released in what year?", 2008 , [2008 , 2000 , 1996 , 2010, 1990]);
+var question3 = new QUESTION ("What was the first internet content search engine?", "Archie" , ["Google" , "Archie" , "AskJeeves" , "AOL", "Yahoo" , "KnowBot"]);
 
-//will need to create a function that runs a check on the value of the answer and the value of the chosen array.  The prompt will save the index spot of the answers
+//store questions in an array....
+var allQuestions = [question1,question2,question3];
+
+//Score default.
+var totalScore= 0;
+
+PrintQuestion(totalScore,allQuestions);
+
+//needed to exit after you bail out of CheckAnswer
+    return;
+
 }
 QUIZ();
-
-// while answer != exit keep doing
